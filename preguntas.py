@@ -8,27 +8,27 @@ No puede utilizar pandas, numpy o scipy. Se debe utilizar solo las funciones de 
 básicas.
 
 Utilice el archivo `data.csv` para resolver las preguntas.
-
-
 """
+
+data = open("data.csv", "r").readlines()
+data = [x.replace("\n","") for x in data]
+data = [x.split("\t") for x in data]
 
 
 def pregunta_01():
     """
     Retorne la suma de la segunda columna.
-
     Rta/
     214
-
     """
-    return
+    return sum(list(map(lambda x: int(x[1]), data)))
+
 
 
 def pregunta_02():
     """
     Retorne la cantidad de registros por cada letra de la primera columna como la lista
     de tuplas (letra, cantidad), ordendas alfabéticamente.
-
     Rta/
     [
         ("A", 8),
@@ -37,11 +37,16 @@ def pregunta_02():
         ("D", 6),
         ("E", 14),
     ]
-
     """
-    return
+    cuenta = {"A":0,"B":0,"C":0,"D":0,"E":0}
+    for i in data :
+        cuenta[i[0]]+=1
+    lista = [(X,cuenta[X])for X in cuenta]
+    return lista
 
 
+
+#sorted([(x[0],x[1])for x in data], key= lambda x: x[0])
 def pregunta_03():
     """
     Retorne la suma de la columna 2 por cada letra de la primera columna como una lista
@@ -55,10 +60,12 @@ def pregunta_03():
         ("D", 31),
         ("E", 67),
     ]
-
     """
-    return
-
+    cuenta = {"A":0,"B":0,"C":0,"D":0,"E":0}
+    for i in data :
+        cuenta[i[0]]+=int(i[1])
+    lista = [(X,cuenta[X])for X in cuenta]
+    return lista
 
 def pregunta_04():
     """
