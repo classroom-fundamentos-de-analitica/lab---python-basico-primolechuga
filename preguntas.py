@@ -25,6 +25,7 @@ def pregunta_01():
 
 
 
+
 def pregunta_02():
     """
     Retorne la cantidad de registros por cada letra de la primera columna como la lista
@@ -71,7 +72,6 @@ def pregunta_04():
     """
     La columna 3 contiene una fecha en formato `YYYY-MM-DD`. Retorne la cantidad de
     registros por cada mes, tal como se muestra a continuación.
-
     Rta/
     [
         ("01", 3),
@@ -87,9 +87,14 @@ def pregunta_04():
         ("11", 2),
         ("12", 3),
     ]
-
     """
-    return
+    lista = [x[2].split("-")[1] for x in data]
+    lista = {x : 0 for x in range(1,13)}
+    for i in data:
+        numero = int(i[2][5:7])
+        lista[numero]+= 1
+    lista = [(X,lista[X])for X in lista]
+    return lista 
 
 
 def pregunta_05():
@@ -105,8 +110,11 @@ def pregunta_05():
         ("D", 8, 3),
         ("E", 9, 1),
     ]
-
     """
+    
+    
+
+
     return
 
 
