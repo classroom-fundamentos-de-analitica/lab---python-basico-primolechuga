@@ -210,10 +210,9 @@ def pregunta_08():
         index = int(i[1])
         if i[0] not in lista[index][1]:
             lista[index][1].append(i[0])
+    for i in lista:
+        i[1].sort()
     return lista
-  
-        
-
 
 def pregunta_09():
     """
@@ -284,7 +283,6 @@ def pregunta_11():
             dicc[j] += int(i[1])
     return dicc
 
-
 def pregunta_12():
     """
     Genere un diccionario que contengan como clave la columna 1 y como valor la suma de
@@ -304,6 +302,4 @@ def pregunta_12():
         lista = i[4].split(",")
         for j in lista:
             dicc[i[0]] += int(j[4:])
-
     return dicc
-print(pregunta_12())
