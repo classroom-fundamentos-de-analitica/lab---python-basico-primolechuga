@@ -25,6 +25,7 @@ def pregunta_01():
 
 
 
+
 def pregunta_02():
     """
     Retorne la cantidad de registros por cada letra de la primera columna como la lista
@@ -71,7 +72,6 @@ def pregunta_04():
     """
     La columna 3 contiene una fecha en formato `YYYY-MM-DD`. Retorne la cantidad de
     registros por cada mes, tal como se muestra a continuación.
-
     Rta/
     [
         ("01", 3),
@@ -87,9 +87,14 @@ def pregunta_04():
         ("11", 2),
         ("12", 3),
     ]
-
     """
-    return
+    dicc = ({f"0{x}" : 0 for x in range(1,10)})
+    dicc.update({f"{x}" : 0 for x in range(10,13)})
+    for i in data:
+        numero = (i[2][5:7])
+        dicc[numero]+= 1
+    dicc = [(X,dicc[X])for X in dicc]
+    return dicc 
 
 
 def pregunta_05():
@@ -105,9 +110,17 @@ def pregunta_05():
         ("D", 8, 3),
         ("E", 9, 1),
     ]
-
     """
-    return
+    lista = [("A", 0, 100),("B", 0, 100),("C", 0, 100),("D", 0, 100),("E", 0, 100)]
+    for i in data :
+        index = ord(i[0]) - 65
+        if int(i[1]) > lista[index][1]:
+            lista[index] = (lista[index][0],int(i[1]),lista[index][2])
+        if int(i[1]) < int(lista[index][2]):
+            lista[index] = (lista[index][0],lista[index][1],int(i[1]))
+    return lista
+
+
 
 
 def pregunta_06():
@@ -130,9 +143,19 @@ def pregunta_06():
         ("iii", 0, 9),
         ("jjj", 5, 17),
     ]
-
     """
-    return
+    dicc = {"aaa":[0,100],"bbb":[0,100],"ccc":[0,100],"ddd":[0,100],"eee":[0,100],"fff":[0,100],"ggg":[0,100],"hhh":[0,100],"iii":[0,100],"jjj":[0,100]}
+    for i in data:
+        lista = i[4].split(",")
+        for j in lista:
+            index = j[:3]
+            if int(j[4:]) > dicc[index][0] :
+                dicc[index][0] = int(j[4:])
+            if int(j[4:]) < dicc[index][1]:
+                dicc[index][1] = int(j[4:])
+    dicc = [(X,dicc[X][1],dicc[X][0])for X in dicc]
+    return(dicc)
+            
 
 
 def pregunta_07():
@@ -154,10 +177,13 @@ def pregunta_07():
         (8, ["E", "D", "E", "A", "B"]),
         (9, ["A", "B", "E", "A", "A", "C"]),
     ]
-
     """
-    return
-
+    lista=[(i,[]) for i in range(10)]
+    for i in data:
+        index = int(i[1])
+        lista[index][1].append(i[0])
+    return lista
+    
 
 def pregunta_08():
     """
@@ -165,7 +191,6 @@ def pregunta_08():
     de la segunda columna; la segunda parte de la tupla es una lista con las letras
     (ordenadas y sin repetir letra) de la primera  columna que aparecen asociadas a dicho
     valor de la segunda columna.
-
     Rta/
     [
         (0, ["C"]),
@@ -179,10 +204,15 @@ def pregunta_08():
         (8, ["A", "B", "D", "E"]),
         (9, ["A", "B", "C", "E"]),
     ]
-
     """
-    return
-
+    lista=[(i,[]) for i in range(10)]
+    for i in data:
+        index = int(i[1])
+        if i[0] not in lista[index][1]:
+            lista[index][1].append(i[0])
+    for i in lista:
+        i[1].sort()
+    return lista
 
 def pregunta_09():
     """
@@ -202,10 +232,14 @@ def pregunta_09():
         "iii": 18,
         "jjj": 18,
     }
-
     """
-    return
-
+    dicc = {"aaa":0,"bbb":0,"ccc":0,"ddd":0,"eee":0,"fff":0,"ggg":0,"hhh":0,"iii":0,"jjj":0}
+    for i in data:
+        lista = i[4].split(",")
+        for j in lista:
+            index = j[:3]
+            dicc[index] += 1
+    return dicc
 
 def pregunta_10():
     """
@@ -223,16 +257,14 @@ def pregunta_10():
         ("E", 3, 3),
     ]
 
-
     """
-    return
+    return [(i[0],len(i[3].split(",")),len(i[4].split(","))) for i in data]
 
 
 def pregunta_11():
     """
     Retorne un diccionario que contengan la suma de la columna 2 para cada letra de la
     columna 4, ordenadas alfabeticamente.
-
     Rta/
     {
         "a": 122,
@@ -243,11 +275,13 @@ def pregunta_11():
         "f": 134,
         "g": 35,
     }
-
-
     """
-    return
-
+    dicc = {"a":0,"b":0,"c":0,"d":0,"e":0,"f":0,"g":0,}
+    for i in data:
+        lista = i[3].split(",")
+        for j in lista:
+            dicc[j] += int(i[1])
+    return dicc
 
 def pregunta_12():
     """
@@ -262,6 +296,10 @@ def pregunta_12():
         'D': 136,
         'E': 324
     }
-
     """
-    return
+    dicc = {'A':0,'B':0,'C':0,'D':0,'E':0}
+    for i in data:
+        lista = i[4].split(",")
+        for j in lista:
+            dicc[i[0]] += int(j[4:])
+    return dicc
